@@ -1,20 +1,20 @@
-/*global
-   angular
- */
+/* global angular */
 
 (function filters() {
   'use strict';
 
-
+  // https://gist.github.com/jasonrhodes/2321581#file-getproperty-js
   function getProperty(value, propName) {
-    var property = value[propName];
-    var propValue;
-    if (typeof(property) === 'function') {
-      propValue = property.call(value);
-    } else {
-      propValue = property;
+    var parts = propName.split( "." ),
+      length = parts.length,
+      i,
+      property = value || this;
+
+    for ( i = 0; i < length; i++ ) {
+      property = property[parts[i]];
     }
-    return propValue;
+
+    return property;
   }
 
 
